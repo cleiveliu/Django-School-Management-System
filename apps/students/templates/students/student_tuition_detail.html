@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Students Tuiton Detail{% endblock title %}
+
+
+{% block content %}
+  <div class="row">
+    <div class="col-sm-12">
+        <p>Tuition detail for student:
+            <br>
+            firstname: {{ object.firstname }}
+            <br>
+            surname: {{ object.surname }}
+            <br>
+            registration_number: {{ object.registration_number }}
+
+        </p>
+        
+
+        <table class="table table-bordered">
+          <tbody>
+            {% for object in student_subjects %}
+            <tr>
+              <td>{{ object }}</td>
+              <td>{{ object.tuition }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+        <p>Total: {{ object.get_tuition }}</p>
+
+    </div>
+  </div>
+
+{% endblock content %}
+
+

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Students Tuiton{% endblock title %}
+
+
+
+{% block content %}
+  <div class="table-responsive">
+    <table id="studenttable" class="table table-bordered table-hover" data-page-length='100'>
+      <thead class="thead-light">
+        <tr>
+          <th>S/N</th>
+          <th>Fullname</th>
+          <th>Registration Number</th>
+          <th>Current Class</th>
+          <th>Gender</th>
+          <th>Mobile Phone Number</th>
+          <th>Status</th>
+          <th>Tuition</th>
+          <th>Tuition Detail</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        {% for object in object_list %}
+          <tr class='clickable-row' data-href="{% url 'student-detail' object.id %}">
+            <td>{{ forloop.counter}}</td>
+            <td>{{ object.surname}} {{student.firstname }} {{student.other_name }}</td>
+            <td>{{ object.registration_number}}</td>
+            <td>{{ object.current_class}}</td>
+            <td>{{ object.get_gender_display}}</td>
+            <td>{{ object.parent_mobile_number}}</td>
+            <td>{{ object.get_current_status_display}}</td>
+            <td>{{ object.get_tuition }}</td>
+            <td><a href="{% url 'student-tuition-detail' object.id %}"><i
+              class="fa fa-info"></i></a> </td>
+          </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+  </div>
+{% endblock content %}
+
+
+{% block morejs %}
+<script>
+  $('#studenttable').DataTable({
+  });
+</script>
+
+{% endblock morejs %}

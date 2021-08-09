@@ -48,6 +48,7 @@ class Student(models.Model):
         return reverse("student-detail", kwargs={"pk": self.pk})
 
     def get_tuition(self):
+        """get how much tuition the student owes based on subjects they have taken"""
         decimal_tuition = sum(subject.tuition for subject in self.subjects.all())
         return f"{float(decimal_tuition): .2f}"
 
