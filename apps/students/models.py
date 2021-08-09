@@ -3,7 +3,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 
-from apps.corecode.models import StudentClass
+from apps.corecode.models import StudentClass, Subject
 
 
 class Student(models.Model):
@@ -36,6 +36,8 @@ class Student(models.Model):
     others = models.TextField(blank=True)
     passport = models.ImageField(blank=True, upload_to="students/passports/")
 
+    subjects = models.ManyToManyField(Subject, blank=True)
+
     class Meta:
         ordering = ["surname", "firstname", "other_name"]
 
@@ -44,6 +46,10 @@ class Student(models.Model):
 
     def get_absolute_url(self):
         return reverse("student-detail", kwargs={"pk": self.pk})
+
+    def get_tuition(self):
+        decimal_tuition = sum(subject.tuition for subject in self.subjects.all())
+        return f"{float(decimal_tuition): .2f}"
 
 
 class StudentBulkUpload(models.Model):
