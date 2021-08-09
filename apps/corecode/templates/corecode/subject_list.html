@@ -24,6 +24,7 @@ Subjects
             {% for object in object_list %}
             <tr>
               <td>{{ object }}</td>
+              <td>{{ object.tuition }}</td>
               <td><a href="{% url 'subject-update' object.id %}"><i
                     class="fa fa-edit"></i></a> <a
                   href="{% url 'subject-delete' object.id %}"><i
